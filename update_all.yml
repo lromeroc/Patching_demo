@@ -1,0 +1,14 @@
+---
+- name: Update Linux packages
+  hosts: all
+  become: yes
+  tasks:
+    - name: Update all packages
+      yum:
+        name: '*'
+        state: latest
+
+    - name: Reboot the server if necessary
+      reboot:
+        test_command: uptime
+        reboot_timeout: 300
